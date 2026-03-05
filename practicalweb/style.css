@@ -1,0 +1,133 @@
+:root {
+    --header-bg: #1e293b;
+    --sidebar-bg: #f1f5f9;
+    --active-color: #2563eb;
+    --text-color: #334155;
+    --border-color: #e2e8f0;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: var(--text-color);
+}
+
+/* --- HIDE ALL RADIO BUTTONS --- */
+input[type="radio"] { display: none; }
+
+/* --- HEADER STYLES --- */
+header {
+    background: var(--header-bg);
+    color: white;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+.top-nav label {
+    padding: 20px 15px;
+    cursor: pointer;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.top-nav label:hover { opacity: 1; }
+
+/* --- LEVEL 1 LOGIC: Highlight Top Menu --- */
+#main-1:checked ~ header label[for="main-1"],
+#main-2:checked ~ header label[for="main-2"],
+#main-3:checked ~ header label[for="main-3"],
+#main-4:checked ~ header label[for="main-4"] {
+    background: rgba(255,255,255,0.1);
+    opacity: 1;
+    border-bottom: 3px solid var(--active-color);
+}
+
+/* --- LEVEL 1 LOGIC: Show Main Pages --- */
+.wrapper { flex: 1; position: relative; overflow: hidden; }
+.main-page { display: none; height: 100%; width: 100%; }
+
+#main-1:checked ~ .wrapper .page-1,
+#main-2:checked ~ .wrapper .page-2,
+#main-3:checked ~ .wrapper .page-3,
+#main-4:checked ~ .wrapper .page-4 {
+    display: flex; /* Flex enables the sidebar layout */
+}
+
+/* ========================================= */
+/* INNER PAGE LAYOUT (Sidebar + Content)     */
+/* ========================================= */
+
+.sidebar {
+    width: 250px;
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.sidebar h3 { padding-left: 20px; font-size: 0.9rem; text-transform: uppercase; color: #94a3b8; }
+
+.sidebar label {
+    padding: 12px 20px;
+    cursor: pointer;
+    border-left: 4px solid transparent;
+    transition: 0.2s;
+}
+
+.sidebar label:hover { background: #e2e8f0; }
+
+.content-display {
+    flex: 1;
+    padding: 40px;
+    overflow-y: auto;
+    background: white;
+}
+
+.sub-content { display: none; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ========================================= */
+/* LEVEL 2 LOGIC: Page 1 Sub-Pages           */
+/* ========================================= */
+
+/* Highlight Sidebar Links */
+#p1-s1:checked ~ .sidebar label[for="p1-s1"],
+#p1-s2:checked ~ .sidebar label[for="p1-s2"],
+#p1-s3:checked ~ .sidebar label[for="p1-s3"],
+#p1-s4:checked ~ .sidebar label[for="p1-s4"],
+#p1-s5:checked ~ .sidebar label[for="p1-s5"],
+#p1-s6:checked ~ .sidebar label[for="p1-s6"],
+#p1-s7:checked ~ .sidebar label[for="p1-s7"],
+#p1-s8:checked ~ .sidebar label[for="p1-s8"],
+#p1-s9:checked ~ .sidebar label[for="p1-s9"],
+#p1-s10:checked ~ .sidebar label[for="p1-s10"] {
+    background: white;
+    border-left-color: var(--active-color);
+    font-weight: bold;
+    color: var(--active-color);
+}
+
+/* Show Sub-Content */
+#p1-s1:checked ~ .content-display .c1,
+#p1-s2:checked ~ .content-display .c2,
+#p1-s3:checked ~ .content-display .c3,
+#p1-s4:checked ~ .content-display .c4,
+#p1-s5:checked ~ .content-display .c5,
+#p1-s6:checked ~ .content-display .c6,
+#p1-s7:checked ~ .content-display .c7,
+#p1-s8:checked ~ .content-display .c8,
+#p1-s9:checked ~ .content-display .c9,
+#p1-s10:checked ~ .content-display .c10 {
+    display: block;
+}
